@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Design Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #a0a0b0;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .tools {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .tools:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .tools span {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 60px 0 40px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: #b0b0c0;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(102, 126, 234, 0.15);
+            color: #a0aff0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(102, 126, 234, 0.25);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .spec-label {
+            font-size: 0.8rem;
+            color: #808090;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .spec-value {
+            font-size: 1rem;
+            color: #e0e0f0;
+            font-weight: 500;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            margin-top: 40px;
+        }
+
+        .coming-soon h3 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .coming-soon p {
+            color: #a0a0b0;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .badge.optimization {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .badge.assembly {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .badge.structural {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            margin-bottom: 50px;
+        }
+
+        .about-text {
+            color: #b0b0c0;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .about-text strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .explore-text {
+            color: #808090;
+            font-style: italic;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-category li {
+            color: #d0d0e0;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .skill-category li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-category li::before {
+            content: '▸';
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Aditya's Engineering Portfolio</h1>
+            <p class="subtitle">Advanced Mechanical Design & Analysis</p>
+            <div class="tools">
+                <span>🔧 Designed in Siemens NX • CATIA V5 • SolidWorks</span>
+            </div>
+        </header>
+
+        <section class="about-section">
+            <div class="about-content">
+                <h2 class="about-title">About Me</h2>
+                <p class="about-text">
+                    I'm a Mechanical Engineer specializing in advanced CAD modeling, finite element analysis, and design optimization. My expertise lies in bridging theoretical analysis with practical engineering solutions through rigorous simulation and iterative design refinement.
+                </p>
+                <p class="about-text">
+                    I specialize in <strong>static structural analysis</strong>, <strong>nonlinear FEA</strong>, <strong>topology optimization</strong>, and <strong>design for manufacturing</strong>. My approach integrates analytical methods with design intent, leveraging FEA to validate structural integrity, topology optimization to achieve optimal material distribution, and design optimization workflows to balance performance constraints with manufacturing feasibility.
+                </p>
+                <p class="about-text">
+                    Each project in my portfolio demonstrates technical precision in CAD modeling, rigorous analysis through finite element methods, and systematic optimization. From initial concept through validation, I employ a comprehensive engineering workflow: parametric modeling in Siemens NX, mesh convergence studies, stress analysis with nonlinear material behavior, and iterative optimization to achieve superior strength to weight ratios.
+                </p>
+                <p class="about-text">
+                    I am a <strong>December 2025 graduate</strong> from the University of Wisconsin Madison with a Master's degree in Mechanical Engineering, and I'm committed to launching my professional career in advanced mechanical design and structural analysis.
+                </p>
+                <p class="about-text explore-text">
+                    ↓ Feel free to explore my projects, FEA simulations, and optimized designs
+                </p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>CAD & Modeling</h3>
+                    <ul>
+                        <li>Siemens NX</li>
+                        <li>Parametric Design</li>
+                        <li>Assembly Modeling</li>
+                        <li>Surface Modeling</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Finite Element Analysis</h3>
+                    <ul>
+                        <li>Static Structural Analysis</li>
+                        <li>Non-linear FEA</li>
+                        <li>Stress & Strain Analysis</li>
+                        <li>Mesh Optimization</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Design Optimization</h3>
+                    <ul>
+                        <li>Topology Optimization</li>
+                        <li>Generative Design</li>
+                        <li>Weight Reduction</li>
+                        <li>Performance Optimization</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Manufacturing & Prototyping</h3>
+                    <ul>
+                        <li>DFM/DFMA</li>
+                        <li>Material Selection</li>
+                        <li>GD&T</li>
+                        <li>Prototype Development</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title">Vehicle Dynamics & Chassis Systems</h2>
+
+        <div class="projects-grid">
+            <!-- Project 1: Off-Road Vehicle -->
+            <div class="project-card">
+                <img src="https://github.com/aadi1307/Images/blob/main/offroad-vehicle.png?raw=true" alt="Off-Road Vehicle" class="project-image">
+                <div class="project-content">
+                    <span class="badge assembly">Full Assembly</span>
+                    <h3 class="project-title">Custom Off-Road Vehicle Design</h3>
+                    <p class="project-description">
+                        Complete off-road vehicle design featuring tubular space frame chassis, independent suspension system with coil-over shocks, and integrated roll cage. Optimized for terrain versatility and driver safety with ergonomic considerations.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Vehicle Dynamics</span>
+                        <span class="tech-tag">Suspension Design</span>
+                        <span class="tech-tag">Space Frame</span>
+                        <span class="tech-tag">Safety Systems</span>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Chassis Type</span>
+                            <span class="spec-value">Tubular Frame</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Suspension</span>
+                            <span class="spec-value">Independent</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">Aluminum 6061</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Seating</span>
+                            <span class="spec-value">Single Driver</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Baja Roll Cage -->
+            <div class="project-card">
+                <img src="https://github.com/aadi1307/Images/blob/main/baja-rollcage.png?raw=true" alt="Baja Roll Cage" class="project-image">
+                <div class="project-content">
+                    <span class="badge structural">Structural Design</span>
+                    <h3 class="project-title">Baja Roll Cage Structure</h3>
+                    <p class="project-description">
+                        Engineered tubular space frame roll cage optimized for maximum driver protection and structural rigidity. Features strategic triangulation for load distribution and compliance with competition safety standards.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Safety Engineering</span>
+                        <span class="tech-tag">Structural Analysis</span>
+                        <span class="tech-tag">Triangulation</span>
+                        <span class="tech-tag">Competition Grade</span>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Design Type</span>
+                            <span class="spec-value">Space Frame</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">AISI 4130 Chromoly</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Application</span>
+                            <span class="spec-value">Baja SAE</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Safety Focus</span>
+                            <span class="spec-value">Driver Protection</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Chassis System -->
+            <div class="project-card">
+                <img src="https://github.com/aadi1307/Images/blob/main/chassis-system.png?raw=true" alt="Chassis Assembly" class="project-image">
+                <div class="project-content">
+                    <span class="badge assembly">Detailed View</span>
+                    <h3 class="project-title">Advanced Chassis & Drivetrain System</h3>
+                    <p class="project-description">
+                        Comprehensive chassis design showcasing integrated drivetrain components, advanced suspension geometry, and powertrain mounting solutions. Features optimized weight distribution and structural reinforcement at critical stress points.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Structural Design</span>
+                        <span class="tech-tag">Drivetrain Integration</span>
+                        <span class="tech-tag">Weight Optimization</span>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">Aluminum 6061</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Design Focus</span>
+                            <span class="spec-value">Structural Integrity</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Components</span>
+                            <span class="spec-value">50+ Parts</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Complexity</span>
+                            <span class="spec-value">Very High</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Suspension & Drivetrain Components</h2>
+
+        <div class="projects-grid">
+            <!-- Front Lower Wishbone -->
+            <div class="project-card">
+                <img src="https://github.com/aadi1307/Images/blob/main/front-wishbone.png?raw=true" alt="Front Lower Wishbone" class="project-image">
+                <div class="project-content">
+                    <span class="badge">Suspension Component</span>
+                    <h3 class="project-title">Front Lower Wishbone</h3>
+                    <p class="project-description">
+                        A-arm design featuring strategic material distribution to achieve optimal strength to weight ratio. Strategic lightweighting maintains structural integrity while reducing unsprung mass for improved handling dynamics.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">A-Arm Design</span>
+                        <span class="tech-tag">Lightweighting</span>
+                        <span class="tech-tag">FEA Validated</span>
+                        <span class="tech-tag">Unsprung Mass Reduction</span>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">Mild Steel</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Component Type</span>
+                            <span class="spec-value">A-Arm / Wishbone</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Position</span>
+                            <span class="spec-value">Front Lower</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Application</span>
+                            <span class="spec-value">Suspension System</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rear Wheel Hub -->
+            <div class="project-card">
+                <img src="https://github.com/aadi1307/Images/blob/main/rear-hub.png?raw=true" alt="Rear Wheel Hub" class="project-image">
+                <div class="project-content">
+                    <span class="badge">Precision Component</span>
+                    <h3 class="project-title">Rear Wheel Hub Assembly</h3>
+                    <p class="project-description">
+                        Multi-point mounting hub designed for rear suspension integration. Features optimized bearing interfaces and mounting provisions for brake calipers and suspension links. Precision engineered for minimal runout and maximum durability.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Precision Engineering</span>
+                        <span class="tech-tag">Bearing Integration</span>
+                        <span class="tech-tag">Multi-Point Mounting</span>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">Aluminum 6061</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Volume</span>
+                            <span class="spec-value">1.04e+05 m³</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Position</span>
+                            <span class="spec-value">Rear Axle</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Length</span>
+                            <span class="spec-value">159 mm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Front Wheel Hub -->
+            <div class="project-card">
+                <img src="https://github.com/aadi1307/Images/blob/main/front-hub.png?raw=true" alt="Front Wheel Hub" class="project-image">
+                <div class="project-content">
+                    <span class="badge optimization">Topology Optimized</span>
+                    <h3 class="project-title">Front Wheel Hub Assembly</h3>
+                    <p class="project-description">
+                        Topology optimized front hub featuring advanced lightweighting while maintaining critical load paths. Integrated design accommodates steering knuckle, brake mounting, and bearing retention with optimized material distribution for maximum efficiency.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Topology Optimization</span>
+                        <span class="tech-tag">Generative Design</span>
+                        <span class="tech-tag">Weight Reduction</span>
+                        <span class="tech-tag">Steering Integration</span>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">Aluminum 6061</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Position</span>
+                            <span class="spec-value">Front Axle</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Integration</span>
+                            <span class="spec-value">Steering Knuckle</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Design Focus</span>
+                            <span class="spec-value">Load Path Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gearbox Assembly -->
+            <div class="project-card">
+                <img src="https://github.com/aadi1307/Images/blob/main/gearbox-assembly.png?raw=true" alt="Gearbox Assembly" class="project-image">
+                <div class="project-content">
+                    <span class="badge assembly">Exploded View</span>
+                    <h3 class="project-title">Precision Gearbox Assembly</h3>
+                    <p class="project-description">
+                        Detailed exploded view of a high-precision gearbox assembly featuring multiple gear stages, bearing housings, and sealing components. The design emphasizes optimal load distribution and minimized backlash for industrial applications.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Assembly Design</span>
+                        <span class="tech-tag">Gear Systems</span>
+                        <span class="tech-tag">Technical Documentation</span>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Components</span>
+                            <span class="spec-value">15+ Parts</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Type</span>
+                            <span class="spec-value">Helical Gear</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Material</span>
+                            <span class="spec-value">Aluminum 6061</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Application</span>
+                            <span class="spec-value">Industrial</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-soon">
+            <h3>🔬 Coming Soon</h3>
+            <p>FEA Analysis Results & Topology Optimization Studies</p>
+            <p style="margin-top: 10px; font-size: 0.95rem;">Structural analysis, stress simulations, and computational optimization workflows</p>
+        </div>
+    </div>
+</body>
+</html>
