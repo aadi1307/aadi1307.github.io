@@ -55,7 +55,9 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -2px;
+            letter-spacing: 0px;
+            line-height: 1.2;
+            transform: scaleY(1.05);
         }
 
         .subtitle {
@@ -317,6 +319,29 @@
 
         .project-card:hover .project-image {
             transform: scale(1.05);
+        }
+
+        .image-count-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .image-count-badge::before {
+            content: '📷';
+            font-size: 1rem;
         }
 
         .project-content {
@@ -617,7 +642,7 @@
                 <div class="skill-category" onclick="showCategory('cad')">
                     <h3>CAD & Modeling</h3>
                     <ul>
-                        <li>Siemens NX</li>
+                        <li>Siemens NX, CATIA V5, SolidWorks</li>
                         <li>Parametric Design</li>
                         <li>Assembly Modeling</li>
                         <li>Surface Modeling</li>
@@ -1651,7 +1676,7 @@
             const image = currentGallery[currentIndex];
             document.getElementById('modalImage').src = image.src;
             document.getElementById('modalTitle').textContent = image.caption;
-            document.getElementById('imageCounter').textContent = `Image ${currentIndex + 1} of ${currentGallery.length}`;
+            document.getElementById('imageCounter').textContent = `${currentIndex + 1} of ${currentGallery.length}`;
             document.getElementById('prevBtn').disabled = currentGallery.length <= 1;
             document.getElementById('nextBtn').disabled = currentGallery.length <= 1;
             updateThumbnails();
@@ -1695,6 +1720,36 @@
         document.getElementById('imageModal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
+
+        // Add image count badges to all project cards
+        function addImageCountBadges() {
+            document.querySelectorAll('.project-card').forEach(card => {
+                const onclick = card.getAttribute('onclick');
+                if (onclick) {
+                    // Extract gallery key from onclick="openModal('key')"
+                    const match = onclick.match(/openModal\('([^']+)'\)/);
+                    if (match && match[1]) {
+                        const galleryKey = match[1];
+                        const gallery = galleries[galleryKey];
+                        if (gallery && gallery.images) {
+                            const imageCount = gallery.images.length;
+                            // Create badge element
+                            const badge = document.createElement('div');
+                            badge.className = 'image-count-badge';
+                            badge.textContent = imageCount === 1 ? '1' : `${imageCount}`;
+                            // Insert badge after the image
+                            const img = card.querySelector('.project-image');
+                            if (img) {
+                                img.parentNode.insertBefore(badge, img.nextSibling);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize badges on page load
+        window.addEventListener('DOMContentLoaded', addImageCountBadges);
     </script>
 </body>
 </html>
