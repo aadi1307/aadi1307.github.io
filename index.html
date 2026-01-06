@@ -179,6 +179,7 @@
             line-height: 1.5;
             margin-bottom: 12px;
             font-weight: 400;
+            text-align: justify;
         }
 
         .about-text strong {
@@ -200,24 +201,38 @@
 
         .skill-category {
             background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 0 0 30px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
+            animation: cardPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes cardPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            }
         }
 
         .skill-category.non-interactive {
             cursor: default;
             opacity: 1;
+            animation: none;
         }
 
         .skill-category:not(.non-interactive):hover {
             background: transparent;
-            border-color: transparent;
-            transform: translateY(-4px);
-            box-shadow: none;
+            border-color: #c0c0c0;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: none;
         }
 
         .skill-category h3 {
@@ -248,23 +263,6 @@
 
         .skill-category li::before {
             display: none;
-        }
-
-        .skill-category:not(.non-interactive)::after {
-            content: 'Click here to explore more';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            font-size: 1rem;
-            color: #000000;
-            font-weight: 500;
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-            padding: 8px 0;
-        }
-
-        .skill-category:not(.non-interactive):hover::after {
-            opacity: 1;
         }
 
         /* Breadcrumb */
@@ -410,6 +408,7 @@
             margin-bottom: 12px;
             line-height: 1.5;
             font-weight: 400;
+            text-align: justify;
         }
 
         .tech-tags {
@@ -694,7 +693,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
-                   My LinkedIn
+                    My LinkedIn
                 </a>
             </div>
         </header>
@@ -1057,8 +1056,8 @@
                             </p>
                             <div class="tech-tags">
                                 <span class="tech-tag">Contact Mechanics</span>
-                                <span class="tech-tag">Gear Analysis</span>
-                                <span class="tech-tag">Fatigue Prediction</span>
+                                <span class="tech-tag">Hertzian Stress</span>
+                                <span class="tech-tag">Fatigue Analysis</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
@@ -1091,9 +1090,9 @@
                                 Static structural analysis of brake assembly under hydraulic actuation and thermal loading. FEA validation of stress distribution, contact pressures, and heat transfer characteristics for reliable braking performance.
                             </p>
                             <div class="tech-tags">
-                                <span class="tech-tag">Static Structural</span>
-                                <span class="tech-tag">Contact Analysis</span>
-                                <span class="tech-tag">Thermal FEA</span>
+                                <span class="tech-tag">Multi-Physics Analysis</span>
+                                <span class="tech-tag">Thermal-Structural</span>
+                                <span class="tech-tag">Contact Mechanics</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
@@ -1123,13 +1122,12 @@
                             <span class="project-badge fea">FEA Analysis</span>
                             <h3 class="project-title">Front Upright - Static Structural Analysis</h3>
                             <p class="project-description">
-                                Comprehensive static structural analysis of front upright assembly using ANSYS. Analysis includes boundary condition setup with multiple load cases, von Mises stress distribution, safety factor evaluation, and total deformation studies under operational loading conditions.
+                                Comprehensive static structural analysis of front upright assembly using ANSYS. Analysis shows <strong>max von Mises stress of 327.24 MPa</strong>, <strong>max deformation of 0.26 mm</strong>, and <strong>minimum safety factor of 1.41</strong> under <strong>3468 N max load</strong> operational conditions.
                             </p>
                             <div class="tech-tags">
-                                <span class="tech-tag">Static Structural Analysis</span>
-                                <span class="tech-tag">ANSYS FEA</span>
-                                <span class="tech-tag">Stress Analysis</span>
-                                <span class="tech-tag">Safety Factor</span>
+                                <span class="tech-tag">327.24 MPa Max Stress</span>
+                                <span class="tech-tag">SF 1.41</span>
+                                <span class="tech-tag">0.26 mm Deformation</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
@@ -1159,13 +1157,12 @@
                             <span class="project-badge fea">FEA Analysis</span>
                             <h3 class="project-title">Brake Pedal - Topology Optimization & FEA</h3>
                             <p class="project-description">
-                                Comprehensive design and static structural analysis of brake pedal featuring topology optimization for weight reduction while maintaining structural integrity. FEA validation shows optimal stress distribution with maximum safety factor under peak pedal force conditions.
+                                Comprehensive design and static structural analysis of brake pedal featuring topology optimization achieving <strong>29% weight reduction</strong>. FEA validation shows <strong>max stress of 116.24 MPa</strong> with <strong>minimum safety factor of 15</strong> under <strong>502.12 N max pedal force</strong> conditions.
                             </p>
                             <div class="tech-tags">
-                                <span class="tech-tag">Topology Optimization</span>
-                                <span class="tech-tag">Static Structural Analysis</span>
-                                <span class="tech-tag">FEA Validation</span>
-                                <span class="tech-tag">Weight Reduction</span>
+                                <span class="tech-tag">29% Weight Reduction</span>
+                                <span class="tech-tag">SF 15 Min</span>
+                                <span class="tech-tag">116.24 MPa Max Stress</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
@@ -1201,12 +1198,12 @@
                             <span class="project-badge fea">Electrostatics</span>
                             <h3 class="project-title">Box with One Face Potential</h3>
                             <p class="project-description">
-                                Electrostatic field distribution analysis in confined geometry with boundary potential conditions using finite element method.
+                                Electrostatic field distribution analysis in confined geometry with boundary potential conditions using finite element method. Solves Laplace equation to determine electric potential and field distribution.
                             </p>
                             <div class="tech-tags">
-                                <span class="tech-tag">FEM</span>
-                                <span class="tech-tag">Boundary Conditions</span>
-                                <span class="tech-tag">Field Analysis</span>
+                                <span class="tech-tag">Laplace Equation</span>
+                                <span class="tech-tag">FEM Analysis</span>
+                                <span class="tech-tag">Electric Field</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
@@ -1228,11 +1225,12 @@
                             <span class="project-badge fea">Electrostatics</span>
                             <h3 class="project-title">Parallel Plate Capacitor</h3>
                             <p class="project-description">
-                                Electric field and potential analysis between parallel plates with capacitance calculation and field distribution visualization.
+                                Electric field and potential analysis between parallel plates with capacitance calculation and field distribution visualization using FEM.
                             </p>
                             <div class="tech-tags">
                                 <span class="tech-tag">Capacitor Analysis</span>
                                 <span class="tech-tag">Electric Field</span>
+                                <span class="tech-tag">FEM</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
@@ -1254,11 +1252,12 @@
                             <span class="project-badge fea">Electrostatics</span>
                             <h3 class="project-title">Coaxial Cable Analysis</h3>
                             <p class="project-description">
-                                Radial field distribution and capacitance per unit length calculation for coaxial cable transmission line configuration.
+                                Radial field distribution and capacitance per unit length calculation for coaxial cable transmission line configuration using FEM.
                             </p>
                             <div class="tech-tags">
                                 <span class="tech-tag">Transmission Line</span>
                                 <span class="tech-tag">Radial Field</span>
+                                <span class="tech-tag">FEM</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
@@ -1280,11 +1279,12 @@
                             <span class="project-badge fea">Electrostatics</span>
                             <h3 class="project-title">Microstrip Transmission Line</h3>
                             <p class="project-description">
-                                Field pattern analysis and characteristic impedance calculation for microstrip transmission line used in RF circuit design.
+                                Field pattern analysis and characteristic impedance calculation for microstrip transmission line used in RF circuit design using FEM.
                             </p>
                             <div class="tech-tags">
                                 <span class="tech-tag">RF Design</span>
-                                <span class="tech-tag">Impedance</span>
+                                <span class="tech-tag">Impedance Calculation</span>
+                                <span class="tech-tag">FEM</span>
                             </div>
                             <div class="specs-grid">
                                 <div class="spec-item">
